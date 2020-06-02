@@ -1,0 +1,53 @@
+# Write a program that asks the user for the weight of their package and then tells them which method of shipping is cheapest and how much it will cost to ship their package using Sal’s Shippers.
+# https://gist.github.com/cf4934a738638e44a169d03bb528f28b
+
+def cost_ground_shipping(weight):
+  if weight <= 2:
+    price_per_pound = 1.50
+  elif weight <= 6:
+    price_per_pound = 3.00
+  elif weight <= 10:
+    price_per_pound = 4.00
+  else:
+    price_per_pound = 4.75 
+  return 20 + (price_per_pound * weight)     
+
+print(cost_ground_shipping(8.4))
+ 
+cost_premium_shipping = 125.00
+
+def cost_drone_shipping(weight):
+  if weight <= 2:
+    price_per_pound = 4.50
+  elif weight <= 6:
+    price_per_pound = 9.00
+  elif weight <= 10:
+    price_per_pound = 12.00
+  else:
+    price_per_pound = 14.25 
+  return price_per_pound * weight
+
+print(cost_drone_shipping(1.5))
+
+def print_cheapest_shipping(weight):
+  ground = cost_ground_shipping(weight)
+  drone = cost_drone_shipping(weight)
+  premium = cost_premium_shipping
+
+  if ground < drone and ground < premium:
+    method = "standard ground"
+    cost = ground
+  elif premium < drone and premium < ground:
+    method = "premium ground"
+    cost = premium
+  else:
+    method = "drone"
+    cost = drone
+ 
+  print(
+    "The cheapest option available is $%.2f with %s shipping."
+    % (cost, method)
+  )
+
+print_cheapest_shipping(4.8)
+print_cheapest_shipping(41.5)
